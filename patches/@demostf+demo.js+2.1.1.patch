@@ -1,0 +1,16 @@
+diff --git a/node_modules/@demostf/demo.js/build/Parser/UserMessage/SayText2.js b/node_modules/@demostf/demo.js/build/Parser/UserMessage/SayText2.js
+index 4dc36c3..7a294c7 100644
+--- a/node_modules/@demostf/demo.js/build/Parser/UserMessage/SayText2.js
++++ b/node_modules/@demostf/demo.js/build/Parser/UserMessage/SayText2.js
+@@ -4,9 +4,9 @@ function ParseSayText2(stream) {
+     const client = stream.readUint8();
+     const raw = stream.readUint8();
+     const pos = stream.index;
+-    let from;
++    let from = 'Server';
+     let text;
+-    let kind;
++    let kind = 'TF_Chat_AllSpec';
+     if (stream.readUint8() === 1) {
+         const first = stream.readUint8();
+         if (first === 7) {
