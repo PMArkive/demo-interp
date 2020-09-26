@@ -12,7 +12,7 @@ function lerp(start, end, amount) {
 }
 function circleLerp(start, end, amount) {
     var shortestAngle = ((((end - start) % 360) + 540) % 360) - 180;
-    return start + (shortestAngle * amount) % 360;
+    return start + ((shortestAngle * amount) % 360);
 }
 function interpNumber(start, end, amount, lowValue, highValue) {
     if (lowValue === 0 && highValue === 360) {
@@ -127,10 +127,7 @@ function interpEntity(start, end, amount) {
     return start;
 }
 function incrementEntityTicks(entity, amount) {
-    var names = [
-        "m_nTickBase",
-        "m_flSimulationTime"
-    ];
+    var names = ["m_nTickBase", "m_flSimulationTime"];
     for (let prop of entity.props) {
         if (names.includes(prop.definition.name)) {
             prop.value = prop.value + amount;
@@ -194,7 +191,7 @@ class InterpTransformer extends Parser_1.Parser {
                         for (let e of p.entities) {
                             if (p.removedEntities.includes(e.entityIndex)) {
                                 //console.log("packet includes removed ent");
-                                delete (lastKnownProps[`${e.entityIndex}:${e.serverClass.id}`]);
+                                delete lastKnownProps[`${e.entityIndex}:${e.serverClass.id}`];
                             }
                             // Store from entity
                             for (const prop of e.props) {
@@ -233,7 +230,7 @@ class InterpTransformer extends Parser_1.Parser {
                                     for (const index of newPacket.removedEntities) {
                                         for (let propIndex = Object.keys(lastKnownProps).length - 1; propIndex > 0; propIndex--) {
                                             if (Object.keys(lastKnownProps)[propIndex].startsWith(index.toString() + ":")) {
-                                                delete (lastKnownProps[Object.keys(lastKnownProps)[propIndex]]);
+                                                delete lastKnownProps[Object.keys(lastKnownProps)[propIndex]];
                                             }
                                         }
                                     }
@@ -318,7 +315,7 @@ class InterpTransformer extends Parser_1.Parser {
                                         // 0        0.25        1.0         0.25
                                         // 0.25     0.5         1.0         1/3
                                         // 0.5      0.75        1.0         0.5
-                                        var interp = 0.25 * (1 / (1 - (0.25 * i)));
+                                        var interp = 0.25 * (1 / (1 - 0.25 * i));
                                         entity = interpEntity(entity, newEntity, interp);
                                     }
                                 }

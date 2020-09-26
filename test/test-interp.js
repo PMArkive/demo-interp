@@ -1,3 +1,3 @@
-var interp = require('../build/index.js').interp;
+var interp = require("../build/index.js").interp;
 
-interp('test.dem', 'test_out.dem');
+interp("test.dem", "test_out.dem");
