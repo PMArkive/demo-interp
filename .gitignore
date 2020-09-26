@@ -1,3 +1,6 @@
+# Tests
+test/test_out.dem
+
 # Logs
 logs
 *.log
